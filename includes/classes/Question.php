@@ -5,7 +5,7 @@ class Question{
 
 	public function __construct($con){
 		$this->con = $con; 
-		$this->user_logged_obj = new User($this->con, $userLoggedIn); 
+		// $this->user_logged_obj = new User($this->con, $userLoggedIn); 
 	}
 
 	public function loadAllQuestions($category = array()){
@@ -57,6 +57,40 @@ class Question{
 			$result .= "There are no questions to load."; 
 		}
 		return $result; 
+	}
+
+	public function fifty_fifty($qId){
+		//I have extensively used php array functions in this method... study 
+		$result = ""; 
+		$skip = ""; 
+		$option_names = array("A", "B", "C", "D"); 
+
+		$query = mysqli_query($this->con, "SELECT options FROM questions WHERE id='$qId'"); 
+		$row = mysqli_fetch_array($query); 
+		$options_array = explode(",", $row['options']); 
+		
+		$correct_ans_query = mysqli_query($this->con, "SELECT correct FROM questions WHERE id='$qId'");
+		$row = mysqli_fetch_array($correct_ans_query); 
+		$correct_ans = $row['correct']; 
+		 
+		$option_answer_array = array_combine($option_names, $options_array); 
+
+		$correct_array = array($correct_ans => $option_answer_array[$correct_ans]); 
+		unset($option_answer_array[$correct_ans]); 
+		
+		$one = array_rand($option_answer_array); 
+		
+		$correct_array[$one] = $option_answer_array[$one]; 
+		ksort($correct_array); 
+
+		foreach($correct_array as $key=>$value){
+			$result .= "<input type='radio' name='answer' value='". $key . "'> " . $value .  "<br>"; 
+		}
+		
+		return $result;
+
+
+
 	}
 }
 	

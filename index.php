@@ -59,14 +59,13 @@
             if(this.readyState == 4 && this.status == 200){
                 console.log(this.responseText); 
                 document.getElementById("optionArea" + qId).innerHTML = this.responseText; 
-                document.getElementById("optionArea" + qId).innerHTML = "I am run."; 
+                
             }
-
-            xhttp.open("POST", "./includes/handlers/fifty_fifty_handler.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("qId=" + qId);
            
         }; 
+        xhttp.open("POST", "includes/handlers/fifty_fifty_handler.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("qId=" + qId);
 
     }; 
 </script>
