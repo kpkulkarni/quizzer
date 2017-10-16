@@ -15,7 +15,7 @@
     if(isset($_POST['qId'])){
         $qId = $_POST['qId']; 
         $question_obj = new Question($con); 
-        echo $question_obj->fifty_fifty($qId); 
+        echo $question_obj->fifty_fifty_compact($qId); 
 
     }
 

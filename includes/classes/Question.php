@@ -15,7 +15,6 @@ class Question{
 			
 			$where_query = "";
 		
-
 			foreach ($category as $category) {
 					
 				$where_query .= "category = '$category' OR ";
@@ -92,6 +91,38 @@ class Question{
 
 
 	}
+
+	public function fifty_fifty_compact($qId){
+		//Declare empty result string
+		$result = ""; 
+		//Query dtabase for selecting options and correct option in a single query
+		$query = mysqli_query($this->con, "SELECT options, correct FROM questions WHERE id = '$qId'"); 
+		$row = mysqli_fetch_array($query);  //fetching results as an array
+		//exploading options string into an array and combining that array with option names to get option ans combination
+			
+		$option_ans_array = array_combine(array("A", "B", "C", "D"), explode(",", $row['options'])); 
+				
+		//While loop for deleting random two incorrect options from option_ans array
+		$i = 0; 
+		while($i < 2){
+			$random = array_rand($option_ans_array); 
+			if($random != $row['correct']){
+				unset($option_ans_array[$random]); 
+				$i++; 
+			}
+		}
+		//sorting the final array to randomize correct option
+		ksort($option_ans_array);
+		
+		//Foreach loop to add form input elements to result string. 	
+		foreach($option_ans_array as $key=>$value){
+			$result .= "<input type='radio' name='answer' value='". $key . "'> " . $value .  "<br>";
+		}
+		//Return result string. 
+		return $result;
+	}
+
+	
 }
 	
 	
