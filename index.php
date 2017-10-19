@@ -58,7 +58,10 @@
                    
             if(this.readyState == 4 && this.status == 200){
                 console.log(this.responseText); 
-                document.getElementById("optionArea" + qId).innerHTML = this.responseText; 
+                var response = this.responseText; 
+                $("#optionArea" + qId).html(response); 
+                $("#optionArea" + qId).fadeIn(); 
+                
                 
             }
            
@@ -67,6 +70,7 @@
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("qId=" + qId);
 
+        document.getElementById("question"+qId).style.display = "none"; 
     }; 
 </script>
 </body>

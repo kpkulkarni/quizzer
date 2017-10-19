@@ -22,7 +22,6 @@ class Question{
 			}
 
 			$where_query = rtrim($where_query, " OR ");
-			
 
 			$query = mysqli_query($this->con, "SELECT * FROM questions WHERE $where_query ORDER BY id DESC"); 
 		}
@@ -47,9 +46,9 @@ class Question{
 							"<input type='hidden' name = 'q_id' value='" .$row['id'] . "'>" . 
 							"<input type='submit' name='submit_answer' value='Lock Answer' class='lock_answer_btn'>" .
 							"</form>".	
-							"<button id='question" . $row['id'] . "' onclick = fiftyFifty(" . $row['id'] .  ")>50 - 50 </button>  <br>" .
+							"<div id='lifeline'><button id='question" . $row['id'] . "' onclick = fiftyFifty(" . $row['id'] .  ") class='fifty_fifty_btn'>50 - 50 </button>  <br></div>" .
 														
-							"<p>Added By " . $row['added_by'] . "</p> </div>" ; 
+							"<p>Added By <strong>" . $row['added_by'] . "</strong></p> </div>" ; 
 			}
 		}
 		else {
@@ -121,7 +120,6 @@ class Question{
 		//Return result string. 
 		return $result;
 	}
-
 	
 }
 	

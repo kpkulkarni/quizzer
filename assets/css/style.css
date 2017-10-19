@@ -147,3 +147,30 @@
 	border-radius: 3px; 
 }
 
+.fifty_fifty_btn {
+	background-color: #5cb85c; 
+	color: #ffffff;
+	border: 1px solid #FFC300; 
+	height: 30px;
+	font-size: 15px;
+	border-radius: 3px; 
+	float: right;
+}
+
+.fifty_fifty_btn:hover {
+	background-color: #FFC300; 
+	color: #000000;
+	border: 1px solid #ff5c33; 
+	height: 30px;
+	font-size: 15px;
+	border-radius: 3px; 
+}
+
+#lifeline{
+	display: inline-block;
+	float: right;
+	position: relative;
+	right: 30px;
+	bottom: 20px; 
+}
+
